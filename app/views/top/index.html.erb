@@ -1,0 +1,30 @@
+<h1>Twitter半日でどこまでできるかシリーズ</h1>
+
+<div style="text-align: center;border: solid 1px">
+<h2>新規登録</h2>
+<%= form_for @account, url: accounts_path, method: :post do |f| %>
+  <%= f.label :nickname, "NICKNAME" %>
+  <%= f.text_field :nickname %><br>
+  <%= f.label :identify_name, "ID(wont change)" %>
+  <%= f.text_field :identify_name %><br>
+  <%= f.label :password, "PASSWORD" %>
+  <%= f.password_field :password %><br>
+  <%= f.label :password_confirmation, "PASSWORDCONFIRMATION" %>
+  <%= f.password_field :password_confirmation %><br>
+
+  <%= f.submit "SUBMIT" %>
+<% end %>
+</div>
+
+<br>
+<div style="text-align: center;border: solid 1px">
+<h2>ログイン</h2>
+<%= form_tag [ :session ] do %>
+  <%= label_tag :identify_name, "Login Name" %>
+  <%= text_field_tag :identify_name %>
+  <%= label_tag :password, 'Password' %>
+  <%= password_field_tag :password %>
+  <%= submit_tag 'Login' %>
+<% end %>
+<br>
+</div>
