@@ -10,13 +10,12 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
     @account.setting_password = true
     if @account.save
-      flash[:notice] = "新規登録！"
+      flash[:notice] = "新規登録！ようこそ！#{@account.nickname}さん(^^)/"
       session[:current_user_id] = @account.id
-      redirect_to :root
     else
       flash[:alert] = "エラー！"
-      render action: 'new'
     end
+    redirect_to :root
   end
 
   private

@@ -11,13 +11,12 @@ class SessionsController < ApplicationController
 
   def create
     if user = UserPasswordAuthenticator.verify(params[:identify_name], params[:password])
-      flash.notice = 'ログインしました。'
+      flash.notice = "ログインしました。こんにちは、#{user.nickname}さん(^o^)/"
       session[:current_user_id] = user.id
-      redirect_to :root
     else
-      flash.now[:alert] = "ログインに失敗しました。"
-      render action: 'new'
+      flash.alert = "ログインに失敗しました。"
     end
+    redirect_to :root
   end
 
   def destroy

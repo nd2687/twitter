@@ -1,0 +1,9 @@
+<h4>
+  <%= current_user.nickname %><br>
+  <%= current_user.identify_name %><br>
+</h4>
+<h3>ユーザー一覧</h3>
+<% @accounts.each do |user| %>
+  <%= user.nickname %>/<%= user.identify_name %>
+  <%= link_to "フォロー", "#" %><br>
+<% end %>

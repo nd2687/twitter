@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312094835) do
+ActiveRecord::Schema.define(version: 20150312142230) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "nickname",        limit: 255, null: false
@@ -22,5 +22,30 @@ ActiveRecord::Schema.define(version: 20150312094835) do
   end
 
   add_index "accounts", ["identify_name"], name: "index_accounts_on_identify_name", unique: true, using: :btree
+
+  create_table "favoriteships", force: :cascade do |t|
+    t.integer  "account_id", limit: 4, null: false
+    t.integer  "tweet_id",   limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "favoriteships", ["account_id", "tweet_id"], name: "index_favoriteships_on_account_id_and_tweet_id", unique: true, using: :btree
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "account_id", limit: 4, null: false
+    t.integer  "friend_id",  limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "friendships", ["account_id", "friend_id"], name: "index_friendships_on_account_id_and_friend_id", unique: true, using: :btree
+
+  create_table "tweets", force: :cascade do |t|
+    t.string   "body",       limit: 255, null: false
+    t.integer  "account_id", limit: 4,   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
 end

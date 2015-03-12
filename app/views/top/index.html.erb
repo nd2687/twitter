@@ -1,30 +1,49 @@
 <h1>Twitter半日でどこまでできるかシリーズ</h1>
 
-<div style="text-align: center;border: solid 1px">
-<h2>新規登録</h2>
-<%= form_for @account, url: accounts_path, method: :post do |f| %>
-  <%= f.label :nickname, "NICKNAME" %>
-  <%= f.text_field :nickname %><br>
-  <%= f.label :identify_name, "ID(wont change)" %>
-  <%= f.text_field :identify_name %><br>
-  <%= f.label :password, "PASSWORD" %>
-  <%= f.password_field :password %><br>
-  <%= f.label :password_confirmation, "PASSWORDCONFIRMATION" %>
-  <%= f.password_field :password_confirmation %><br>
+<% if current_user %>
+  <%= link_to "ログアウト", :session, method: :delete %>
+  <div class="account_ui_box">
+    <div class="box_user">
+      <%= render 'user' %>
+    </div>
+    <div class="box_tl">
+      <%= render 'time_line' %>
+    </div>
+  </div>
+<% else %>
+  <h2>新規登録</h2>
+  <table>
+  <%= form_for @account, url: accounts_path, method: :post do |f| %>
+    <tr>
+      <th><%= f.label :nickname, "ニックネーム" %></th>
+      <th><%= f.text_field :nickname %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :identify_name, "ID(後から変更できません), ※半角英数字のみ" %></th>
+      <th><%= f.text_field :identify_name %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :password, "パスワード" %></th>
+      <th><%= f.password_field :password %></th>
+    </tr>
+    <tr>
+      <th><%= f.label :password_confirmation, "パスワード再入力" %></th>
+      <th><%= f.password_field :password_confirmation %></th>
+    </tr>
 
-  <%= f.submit "SUBMIT" %>
-<% end %>
-</div>
+    <tr>
+      <th><%= f.submit "登録" %></th>
+    </tr>
+  </table>
+  <% end %>
 
-<br>
-<div style="text-align: center;border: solid 1px">
-<h2>ログイン</h2>
-<%= form_tag [ :session ] do %>
-  <%= label_tag :identify_name, "Login Name" %>
-  <%= text_field_tag :identify_name %>
-  <%= label_tag :password, 'Password' %>
-  <%= password_field_tag :password %>
-  <%= submit_tag 'Login' %>
+  <br>
+  <h2>ログイン</h2>
+  <%= form_tag [ :session ] do %>
+    <%= label_tag :identify_name, "ID" %>
+    <%= text_field_tag :identify_name %>
+    <%= label_tag :password, 'パスワード' %>
+    <%= password_field_tag :password %>
+    <%= submit_tag 'Login' %>
+  <% end %>
 <% end %>
-<br>
-</div>
