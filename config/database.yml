@@ -1,5 +1,4 @@
 default: &default
-  adapter: mysql2
   pool: 5
   timeout: 5000
   username: root
@@ -7,8 +6,10 @@ default: &default
 
 development:
   <<: *default
-  database: db/ziita_development
+  adapter: mysql2
+  database: db/twitter_development
 
 production:
+  adapter: postgresql
   <<: *default
-  database: db/ziita_production
+  database: db/twitter_production
