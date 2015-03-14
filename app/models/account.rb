@@ -34,4 +34,28 @@ class Account < ActiveRecord::Base
       false
     end
   end
+
+  def not_follow_list
+    not_display_ids = []
+    not_display_ids << friends.map(&:id)
+    not_display_ids << self.id
+    Account.where.not(id: not_display_ids)
+  end
+
+  def normal_time_line
+    timeline = []
+    timeline << self.tweets
+    self.friends.each do |friend|
+      timeline << friend.tweets
+    end
+    timeline.flatten!
+    timeline.sort_by{|obj| obj.created_at}.reverse
+  end
+
+  def favorited?(timeline_tweet)
+    favorite_tweets = []
+    favorite_tweets << self.favorite_tweets
+    favorite_tweets.flatten!
+    favorite_tweets.include?(timeline_tweet)
+  end
 end

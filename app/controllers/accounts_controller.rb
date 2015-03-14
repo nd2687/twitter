@@ -18,6 +18,11 @@ class AccountsController < ApplicationController
     redirect_to :root
   end
 
+  def follow
+    Friendship.create(:account => current_user, :friend_id => params[:id])
+    redirect_to :root
+  end
+
   private
   def account_params
     params.require(:account).permit(

@@ -1,8 +1,39 @@
 .account_ui_box {
-  width: 500px;
+  width: 940px;
   display: table;
 }
 
 .box_tl, .box_user {
+  margin-left: 40px;
   display: table-cell;
+  padding: 20px;
+  width: 50%;
+}
+
+.user_short_info {
+  border: solid 1px;
+  padding: 20px;
+  background-color: #238323;
+  color: white;
+}
+
+.user_tweet_box {
+  border: solid 1px;
+  padding: 20px;
+  background-color: #235423;
+  color: white;
+}
+
+.recommend_user_box {
+  border: solid 1px #232323;
+  padding: 20px;
+}
+
+.timeline_tweet_box {
+  border: solid 1em #1F5FA3;
+  padding: 45px;
+}
+
+.font_thinly {
+  color: #d9efcf;
 }

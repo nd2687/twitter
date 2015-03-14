@@ -1,5 +1,16 @@
-<h3>タイムライン</h3>
-
-<% (1..100).each do %>
-  Tweet<br>
+<% @timeline.each do |tl| %>
+  <div class="timeline_tweet_box">
+    <span class="font_thinly">
+      <%= tl.account.nickname %>@<%= tl.account.identify_name %><br>
+    </span>
+    <%= tl.body %><br>
+    <% if current_user.favorited?(tl) %>
+      <%= link_to "★ ", [ :unfavorite, current_user, tl ], method: :delete %>
+    <% else %>
+      <%= link_to "☆ ", [ :favorite, current_user, tl ], method: :post %>
+    <% end %>
+    <span class="font_thinly">
+      <%= tl.created_at.strftime('%Y年%m月%d日%H時%M分') %><br>
+    </span>
+  </div>
 <% end %>

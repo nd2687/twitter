@@ -1,9 +1,26 @@
 <h4>
-  <%= current_user.nickname %><br>
-  <%= current_user.identify_name %><br>
+  <div class="user_short_info">
+    マイプロフィール<br>
+    ニックネーム:<%= current_user.nickname %>
+    ユーザーID:<%= current_user.identify_name %><br>
+    フォロー:<%= current_user.friends.count %>
+    フォロワー:<%= current_user.followers.count %>
+    ツイート数:<%= current_user.tweets.count %>
+    お気に入り数:<%= current_user.favorite_tweets.count %><br>
+  </div>
+  <div class="user_tweet_box">
+    <h3>つぶやく</h3>
+    <%= form_for @tweet, url: [ current_user, :tweets ], method: :post do |f| %>
+      <%= f.text_area :body, :size => "32x10" %>
+      <%= f.submit "ツイート" %>
+    <% end %>
+  </div>
 </h4>
-<h3>ユーザー一覧</h3>
-<% @accounts.each do |user| %>
-  <%= user.nickname %>/<%= user.identify_name %>
-  <%= link_to "フォロー", "#" %><br>
-<% end %>
+
+<div class="recommend_user_box">
+  <h3>ユーザー一覧</h3>
+  <% @accounts.each do |user| %>
+    <%= user.nickname %>/<%= user.identify_name %>
+    <%= link_to "フォロー", [ :follow, user ], method: :post %><br>
+  <% end %>
+</div>
